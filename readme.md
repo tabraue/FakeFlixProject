@@ -1,3 +1,6 @@
+![](./images/db.png)
+![](./images/draw.png)
+
 ## Routes
 - **/auth**
 - **/user**
@@ -14,7 +17,7 @@ Below each model is equivalent to a Database's table with its fields and data pa
 
 <details><summary><b>User</b></summary>
 
-- **id** (type: <em>INTEGER</em>, primaryKey: <em>true</em>, autoIncrement: <em>true</em>, allowNull: <em>true</em>)
+- **id** ( type: <em>INTEGER</em>, primaryKey: <em>true</em>, autoIncrement: <em>true</em>, allowNull: <em>true</em> )
 - **subscriptionId** (type: <em>INTEGER</em>, foreignKey: <em>true</em>, allowNull: <em>false</em>)
 - **profileId** (type: <em>INTEGER</em>, foreignKey: <em>true</em>, allowNull: <em>false</em>)
 - **email** (type: <em>INTEGER</em>, allowNull: <em>false</em>, unique: <em>true</em>, validate: <em>isEmail</em>)
@@ -28,18 +31,53 @@ ROUTE /auth
 POST: '/signup' => signUp
 POST: '/login'  => logIn
 ```
-
 #### CRUD
 ```js
 ROUTE /user
 
 GET:    '/:userId'  => checkAuth, getUser
-POST:   '/'         => checkAuth, createUser
 PATCH:  '/:userId'  => checkAuth, updateUser
 DELETE: '/:userId'  => checkAuth, deleteUser
 ```
+##### DO
+
+➡️ User can signup
+
+➡️ User can login
+
+➡️ User can see their own info
+
+➡️ User can modify their own info
+
+➡️ User can delete theirself
+
 
 </details>
+
+
+<details><summary><b>Subscription</b></summary>
+
+- **id** (type: <em>INTEGER</em>, primaryKey: <em>true</em>, autoIncrement: <em>true</em>, allowNull: <em>true</em>)
+- **type** (type: <em>ENUM('month', 'year')</em>, allowNull: <em>false</em>)
+- **name** (type: <em>VARCHAR</em>, allowNull: <em>false</em>)
+- **price** (type: <em>INTEGER</em>, allowNull: <em>false</em>)
+
+#### CRUD
+```js
+ROUTE /subscription
+
+POST:   '/:userId'  => checkAuth, subscribe
+DELETE: '/:userId'  => checkAuth, unSubscribe
+```
+
+#### DO
+
+➡️ User can subscribe
+
+➡️ User can unsubscribe
+
+</details>
+
 
 <details><summary><b>Profile</b></summary>
 
@@ -56,22 +94,30 @@ POST:   '/'            => checkAuth, createProfile
 PATCH:  '/:profileId'  => checkAuth, changeProfile
 DELETE: '/:profileId'  => checkAuth, deleteProfile
 ```
+##### DO
+
+➡️ User can see their own profile
+
+➡️ User can create their own profile
+
+➡️ User can modify their own profile
 
 </details>
 
-<details><summary><b>Subscription</b></summary>
+<details><summary><b>Category</b></summary>
 
 - **id** (type: <em>INTEGER</em>, primaryKey: <em>true</em>, autoIncrement: <em>true</em>, allowNull: <em>true</em>)
-- **type** (type: <em>ENUM('month', 'year')</em>, allowNull: <em>false</em>)
 - **name** (type: <em>VARCHAR</em>, allowNull: <em>false</em>)
-- **price** (type: <em>INTEGER</em>, allowNull: <em>false</em>)
+
 
 #### CRUD
 ```js
-ROUTE /subscription
+ROUTE /category
 
-POST:   '/:userId'  => checkAuth, paySubscription
-DELETE: '/:userId'  => checkAuth, stopSubscription
+GET:    '/'            => checkAuth, getAllCategories
+GET:    '/:categoryId' => checkAuth, getOneCategory
+POST:   '/'            => checkAuth, createCategory
+DELETE: '/:categoryId' => checkAuth, deleteCategory
 ```
 
 </details>
@@ -93,8 +139,19 @@ ROUTE /serie
 
 GET:    '/:serieId' => checkAuth, getOneSerie
 GET:    '/'         => checkAuth, getAllSeries
-PATCH:  '/:serieId'  => checkAuth, updateSerie
+POST:   '/'         => checkAuth, createSerie
+PATCH:  '/:serieId' => checkAuth, updateSerie
 ```
+
+#### DO
+
+➡️ User can see all series
+
+➡️ User can see one serie
+
+➡️ User can create one serie
+
+➡️ User can update one serie
 
 </details>
 
@@ -109,28 +166,19 @@ PATCH:  '/:serieId'  => checkAuth, updateSerie
 ROUTE /favorite
 
 GET:    '/:userId'          => checkAuth, getFavorites
-POST:   '/:userId'          => checkAuth, addFavorites
+POST:   '/:userId/:serieId' => checkAuth, addFavorites
 DELETE: '/:userId/:serieId' => checkAuth, deleteFavorite
 ```
 
-</details>
+#### DO
 
-<details><summary><b>Category</b></summary>
+➡️ User can see all their favs series
 
-- **id** (type: <em>INTEGER</em>, primaryKey: <em>true</em>, autoIncrement: <em>true</em>, allowNull: <em>true</em>)
-- **name** (type: <em>VARCHAR</em>, allowNull: <em>false</em>)
-
-
-#### CRUD
-```js
-ROUTE /category
-
-GET:    '/:userId'          => checkAuth, getFavorites
-POST:   '/:userId'          => checkAuth, addFavorites
-DELETE: '/:userId/:serieId' => checkAuth, deleteFavorite
-```
+➡️ User can add one serie to favs
 
 </details>
+
+
 
 <details><summary><b>Rating</b></summary>
 
@@ -145,10 +193,22 @@ DELETE: '/:userId/:serieId' => checkAuth, deleteFavorite
 ```js
 ROUTE /rating
 
-GET:    '/:serieId'  => checkAuth, getSerieRating
-POST:   '/'          => checkAuth, addRating
+GET:    '/:serieId'  => checkAuth, getRating
+POST:   '/:serieId'  => checkAuth, createRating
 PATCH:  '/:ratingId' => checkAuth, updateRating
-DELETE: '/:ratingId' => checkAuth, deleteFavorite
+DELETE: '/:ratingId' => checkAuth, deleteRating
 ```
 
+#### DO
+
+➡️ User can create a serie's rating
+
+➡️ User can get one rating
+
+➡️ User can update rating
+
+➡️ User can delete rating
+
+
 </details>
+
