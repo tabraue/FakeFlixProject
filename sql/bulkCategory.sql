@@ -1,0 +1,10 @@
+INSERT INTO categories (name) VALUES ('Drama');
+INSERT INTO categories (name) VALUES ('Comedia');
+INSERT INTO categories (name) VALUES ('Terror');
+INSERT INTO categories (name) VALUES ('Ciencia Ficción');
+INSERT INTO categories (name) VALUES ('Documental');
+INSERT INTO categories (name) VALUES ('Acción');
+INSERT INTO categories (name) VALUES ('Fantasía');
+INSERT INTO categories (name) VALUES ('Misterio');
+INSERT INTO categories (name) VALUES ('Animación');
+INSERT INTO categories (name) VALUES ('Reality Show');

@@ -22,7 +22,7 @@ Below each model is equivalent to a Database's table with its fields and data pa
 - **profileId** (type: <em>INTEGER</em>, foreignKey: <em>true</em>, allowNull: <em>false</em>)
 - **email** (type: <em>INTEGER</em>, allowNull: <em>false</em>, unique: <em>true</em>, validate: <em>isEmail</em>)
 - **password** (type: <em>STRING</em>, allowNull: <em>false</em>, validate: regex (<em>Minimum four characters, at least one uppercase letter, one lowercase letter and one number</em>))
-- **CC** (type: <em>STRING</em>, allowNull: <em>false</em>)
+- **role** (type: <em>ENUM</em>('user', 'admin'), allowNull: <em>false</em>)
 
 #### Auth
 ```js
@@ -35,8 +35,9 @@ POST: '/login'  => logIn
 ```js
 ROUTE /user
 
-GET:    '/:userId'  => checkAuth, getUser
-PATCH:  '/:userId'  => checkAuth, updateUser
+GET:    '/:userId'  => checkAuth, isAdmin, getUser
+GET:    '/'         => checkAuth, getMyUser
+PATCH:  '/'  => checkAuth, updateUser
 DELETE: '/:userId'  => checkAuth, deleteUser
 ```
 ##### DO
@@ -60,12 +61,12 @@ DELETE: '/:userId'  => checkAuth, deleteUser
 - **id** (type: <em>INTEGER</em>, primaryKey: <em>true</em>, autoIncrement: <em>true</em>, allowNull: <em>true</em>)
 - **type** (type: <em>ENUM('month', 'year')</em>, allowNull: <em>false</em>)
 - **name** (type: <em>VARCHAR</em>, allowNull: <em>false</em>)
-- **price** (type: <em>INTEGER</em>, allowNull: <em>false</em>)
 
 #### CRUD
 ```js
 ROUTE /subscription
 
+GET:    '/'         => getAllSubscriptions
 POST:   '/:userId'  => checkAuth, subscribe
 DELETE: '/:userId'  => checkAuth, unSubscribe
 ```
@@ -89,9 +90,9 @@ DELETE: '/:userId'  => checkAuth, unSubscribe
 ```js
 ROUTE /profile
 
-GET:    '/:profileId'  => checkAuth, getProfile
-POST:   '/'            => checkAuth, createProfile
-PATCH:  '/:profileId'  => checkAuth, changeProfile
+GET:    '/:userId'  => checkAuth, getProfile
+POST:   '/:userId'     => checkAuth, createProfile
+PATCH:  '/:profileId'  => checkAuth, updateProfile
 DELETE: '/:profileId'  => checkAuth, deleteProfile
 ```
 ##### DO
@@ -137,10 +138,11 @@ DELETE: '/:categoryId' => checkAuth, deleteCategory
 ```js
 ROUTE /serie
 
-GET:    '/:serieId' => checkAuth, getOneSerie
-GET:    '/'         => checkAuth, getAllSeries
-POST:   '/'         => checkAuth, createSerie
-PATCH:  '/:serieId' => checkAuth, updateSerie
+GET:    '/:serieId'               => checkAuth, getOneSerie
+GET:    '/'                       => checkAuth, getAllSeries
+GET:    '/categoryId/:categoryId' => checkAuth, getSeriesByCategory
+POST:   '/'                       => checkAuth, isAdmin, createSerie
+PATCH:  '/:serieId'               => checkAuth, updateSerie
 ```
 
 #### DO
@@ -165,9 +167,9 @@ PATCH:  '/:serieId' => checkAuth, updateSerie
 ```js
 ROUTE /favorite
 
-GET:    '/:userId'          => checkAuth, getFavorites
-POST:   '/:userId/:serieId' => checkAuth, addFavorites
-DELETE: '/:userId/:serieId' => checkAuth, deleteFavorite
+GET:    '/:userId'                => checkAuth, getFavorites
+POST:   '/:userId/serie/:serieId' => checkAuth, addFavorite
+DELETE: '/:userId/serie/:serieId' => checkAuth, deleteFavorite
 ```
 
 #### DO

@@ -1,0 +1,10 @@
+INSERT INTO series (categoryId, title, description, duration, rating) VALUES (1, 'Breaking Bad', 'Un profesor de química se convierte en fabricante de metanfetamina', '45 min', 9);
+INSERT INTO series (categoryId, title, description, duration, rating) VALUES (2, 'The Office', 'Una mirada humorística a la vida de oficina', '22 min', 8);
+INSERT INTO series (categoryId, title, description, duration, rating) VALUES (3, 'Stranger Things', 'Niños enfrentando fuerzas sobrenaturales en los 80s', '50 min', 9);
+INSERT INTO series (categoryId, title, description, duration, rating) VALUES (4, 'Black Mirror', 'Historias de ciencia ficción sobre tecnología y sociedad', '60 min', 9);
+INSERT INTO series (categoryId, title, description, duration, rating) VALUES (5, 'Planet Earth', 'Documental sobre la naturaleza y la vida animal', '50 min', 9);
+INSERT INTO series (categoryId, title, description, duration, rating) VALUES (6, 'Daredevil', 'Un abogado ciego lucha contra el crimen como superhéroe', '55 min', 8);
+INSERT INTO series (categoryId, title, description, duration, rating) VALUES (7, 'Game of Thrones', 'Noble families fight for control of the mythical land of Westeros', '57 min', 9);
+INSERT INTO series (categoryId, title, description, duration, rating) VALUES (8, 'Sherlock', 'Adaptación moderna de las historias de Sherlock Holmes', '90 min', 9);
+INSERT INTO series (categoryId, title, description, duration, rating) VALUES (9, 'Rick and Morty', 'Aventuras interdimensionales de un científico y su nieto', '22 min', 9);
+INSERT INTO series (categoryId, title, description, duration, rating) VALUES (10, 'Survivor', 'Concursantes son aislados en la naturaleza para competir por premios', '42 min', 7);
